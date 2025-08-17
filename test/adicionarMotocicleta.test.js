@@ -135,6 +135,41 @@ describe('Moto Market API - Add Motorcycle', () => {
 
     });
 
+    it('TST-3 - Verificar opcionalidade do campo comentário durante cadastro ', async () => {
+      const motoId1 = {
+        fabricante: 'KTM',
+        modelo: '950 Adventure',
+        ano: 2005,
+        km: 70000,
+        valor: 40000.00,
+        comentario: null
+      };
+
+      const resId1 = await request(app)
+        .post('/motos')
+        .send(motoId1);
+
+      expect(resId1.status).to.equal(201);
+      expect(resId1.body).to.include(motoId1);
+      
+      const motoId2 = {
+        fabricante: 'KTM',
+        modelo: '950 Adventure',
+        ano: 2005,
+        km: 70000,
+        valor: 40000.00,
+        comentario: "Validando comentário"
+      };
+
+      const resId2 = await request(app)
+        .post('/motos')
+        .send(motoId2);
+
+      expect(resId2.status).to.equal(201);
+      expect(resId2.body).to.include(motoId2);
+    });    
+
+
   });
 });
 
