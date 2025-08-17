@@ -1,0 +1,167 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Moto Market API",
+    "version": "1.0.0",
+    "description": "API REST para cadastro de motocicletas"
+  },
+  "servers": [
+    { "url": "http://localhost:3001" }
+  ],
+  "paths": {
+    "/motos": {
+      "get": {
+        "summary": "Lista todas as motos",
+        "responses": {
+          "200": {
+            "description": "Lista de motos",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Moto" } }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cadastra uma nova moto",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/MotoInput" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Moto cadastrada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Moto" }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição inválida",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "error": "Dados obrigatórios não preenchidos" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/motos/{id}": {
+      "put": {
+        "summary": "Edita uma moto",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Moto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Moto editada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Moto" }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição inválida",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "error": "Dados obrigatórios não preenchidos" }
+              }
+            }
+          },
+          "404": {
+            "description": "Moto não encontrada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "error": "Moto não encontrada" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Exclui uma moto",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "204": {
+            "description": "Moto excluída",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Success" },
+                "example": { "message": "Moto excluída com sucesso" }
+              }
+            }
+          },
+          "404": {
+            "description": "Moto não encontrada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "error": "Moto não encontrada" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Success": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string", "example": "Moto excluída com sucesso" }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string", "example": "Mensagem de erro" }
+        }
+      },
+      "Moto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "fabricante": { "type": "string", "example": "Honda" },
+          "modelo": { "type": "string", "example": "CB 500" },
+          "ano": { "type": "string", "example": "2020" },
+          "km": { "type": "string", "example": "10000" },
+          "valor": { "type": "string", "example": "25000" },
+          "comentario": { "type": "string", "example": "Moto em ótimo estado" }
+        }
+      },
+      "MotoInput": {
+        "type": "object",
+        "properties": {
+          "fabricante": { "type": "string", "example": "Honda" },
+          "modelo": { "type": "string", "example": "CB 500" },
+          "ano": { "type": "string", "example": "2020" },
+          "km": { "type": "string", "example": "10000" },
+          "valor": { "type": "string", "example": "25000" },
+          "comentario": { "type": "string", "example": "Moto em ótimo estado" }
+        }
+      }
+    }
+  }
+}
