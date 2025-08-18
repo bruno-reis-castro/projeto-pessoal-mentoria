@@ -62,15 +62,11 @@ npm install
 
 ### Editar moto
 - **PUT** `/motos/{id}`
-- Body: campos a serem atualizados (obrigatórios: `fabricante`, `modelo`, `ano`)
-- Resposta 200: moto editada
-- Resposta 404: `{ "error": "Moto não encontrada" }`
-- Resposta 400: `{ "error": "Dados obrigatórios não preenchidos" }`
+
 
 ### Excluir moto
 - **DELETE** `/motos/{id}`
-- Resposta 200: `{ "message": "Moto excluída com sucesso" }`
-- Resposta 404: `{ "error": "Moto não encontrada" }`
+
 
 ## Documentação interativa
 Acesse o Swagger em: [http://localhost:3001/api-docs](http://localhost:3001/api-docs)
@@ -78,7 +74,7 @@ Acesse o Swagger em: [http://localhost:3001/api-docs](http://localhost:3001/api-
 ## Testes automatizados
 - Para rodar os testes:
   ```
-
+   npm test
   ```
 - Os testes cobrem cenários de cadastro, edição, exclusão e validação de erros.
 
