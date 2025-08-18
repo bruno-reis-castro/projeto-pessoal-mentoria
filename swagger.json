@@ -103,8 +103,8 @@
           { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
         ],
         "responses": {
-          "204": {
-            "description": "Moto excluída",
+          "200": {
+            "description": "Moto excluída com sucesso",
             "content": {
               "application/json": {
                 "schema": { "$ref": "#/components/schemas/Success" },

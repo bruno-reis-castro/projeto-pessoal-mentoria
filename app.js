@@ -49,7 +49,7 @@ app.delete('/motos/:id', (req, res) => {
   const idx = motos.findIndex(m => m.id === id);
   if (idx === -1) return res.status(404).json({ error: 'Moto não encontrada' });
   motos.splice(idx, 1);
-  res.status(204).end();
+  res.status(200).json({ message: 'Moto excluída com sucesso' });
 });
 
 
